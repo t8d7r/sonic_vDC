@@ -1,0 +1,16 @@
+---
+- name: "SONiC Configure Switch"
+  hosts: sonic
+  gather_facts: no
+  connection: httpapi
+  become: true
+  collections:
+    - dellemc.enterprise_sonic
+  tasks:
+    - name: Configure unnumbered
+      sonic_api:
+        url: data/sonic-interface:sonic-interface
+        method: "PUT"
+        body: { "sonic-interface:sonic-interface": { "INTERFACE": { "INTERFACE_LIST": [ { "portname": "{{item.name}}", "ipv6_use_link_local_only": "enable", } ], } }}
+        status_code: 201
+      loop: "{{ipv6_use_link_local_interfaces}}"

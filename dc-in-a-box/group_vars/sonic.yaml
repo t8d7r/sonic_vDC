@@ -1,0 +1,79 @@
+ansible_ssh_user: admin
+ansible_ssh_pass: YourPaSsWoRd 
+ansible_ssh_extra_args: "-o StrictHostKeyChecking=no"
+ansible_network_os: dellemc.sonic.sonic
+
+# Additional parameters for connection type httpapi
+ansible_httpapi_use_ssl: true
+ansible_httpapi_validate_certs: false
+
+# Fabric data
+To_leaf_1: Ethernet0 
+To_leaf_2: Ethernet1
+To_leaf_3: Ethernet2
+To_leaf_4: Ethernet3
+To_spine_1: Ethernet0
+To_spine_2: Ethernet1
+
+loopback_underlay: Loopback0
+loopback_overlay: Loopback1
+vlan_mclag: 4094
+PortChannel_mclag: PortChannel1
+
+host_data:
+    leaf1:
+      loopback0_ip: 10.0.0.1/32
+      loopback1_ip: 10.0.10.1/32
+      vlan_mclag_ip: 10.10.10.0/31 
+      vlan_client_1: 100
+      vlan_client_2: 200
+      peer_ip: 10.10.10.1
+      source_ip: 10.10.10.0 
+      bgp_asn: 65001
+      vtep_name: vtep1 
+    leaf2:
+      loopback0_ip: 10.0.0.2/32
+      loopback1_ip: 10.0.10.1/32
+      vlan_mclag_ip: 10.10.10.1/31
+      vlan_client_1: 100
+      vlan_client_2: 200
+      peer_ip: 10.10.10.0
+      source_ip: 10.10.10.1
+      bgp_asn: 65001
+      vtep_name: vtep1
+    leaf3:
+      loopback0_ip: 10.0.0.3/32
+      loopback1_ip: 10.0.10.2/32
+      vlan_mclag_ip: 10.10.10.2/31
+      vlan_client_1: 150
+      vlan_client_2: 200
+      peer_ip: 10.10.10.3
+      source_ip: 10.10.10.2
+      bgp_asn: 65002
+      vtep_name: vtep2 
+    leaf4:
+      loopback0_ip: 10.0.0.4/32
+      loopback1_ip: 10.0.10.2/32
+      vlan_mclag_ip: 10.10.10.3/31
+      vlan_client_1: 150
+      vlan_client_2: 200
+      peer_ip: 10.10.10.2
+      source_ip: 10.10.10.3 
+      bgp_asn: 65002
+      vtep_name: vtep2
+    spine1:
+      loopback0_ip: 10.0.0.101/32
+      bgp_asn: 65000
+    spine2:
+      loopback0_ip: 10.0.0.102/32
+      bgp_asn: 65000
+
+loopback0_ip: "{{ host_data[inventory_hostname].loopback0_ip }}"
+loopback1_ip: "{{host_data[inventory_hostname].loopback1_ip}}"
+bgp_asn: "{{ host_data[inventory_hostname].bgp_asn }}"
+vlan_mclag_ip: "{{ host_data[inventory_hostname].vlan_mclag_ip }}"
+peer_ip: "{{ host_data[inventory_hostname].peer_ip }}"
+source_ip: "{{ host_data[inventory_hostname].source_ip }}"
+vtep_name: "{{ host_data[inventory_hostname].vtep_name }}"
+vlan_client_1: "{{ host_data[inventory_hostname].vlan_client_1 }}"
+vlan_client_2: "{{ host_data[inventory_hostname].vlan_client_2 }}"

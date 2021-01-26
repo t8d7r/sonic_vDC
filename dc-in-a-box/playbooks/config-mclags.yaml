@@ -1,0 +1,13 @@
+---
+- name: "SONiC Configure Mclags"
+  hosts: leaf1
+  gather_facts: no
+  connection: httpapi
+  become: true
+  collections:
+    - dellemc.enterprise_sonic
+  tasks:
+  - name: Configure Mclag
+    sonic_mclag: 
+      config: "{{sonic_mclag}}"
+    when: sonic_mclag is defined and sonic_mclag

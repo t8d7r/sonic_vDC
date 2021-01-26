@@ -1,0 +1,13 @@
+---
+- name: "SONiC Configure Vlans"
+  hosts: leafs
+  gather_facts: no
+  connection: httpapi
+  become: true
+  collections:
+    - dellemc.enterprise_sonic
+  tasks:
+  - name: Configure vlans
+    sonic_vlans:
+      config: "{{sonic_vlans_list}}"
+      state: merged

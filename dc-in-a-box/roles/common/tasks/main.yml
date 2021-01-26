@@ -1,0 +1,19 @@
+---
+- name: Perform PUT operation to disable ztp
+  sonic_api:
+    url: data/openconfig-ztp:ztp/config/admin-mode
+    method: "PATCH"
+    body: {"openconfig-ztp:admin-mode":false}
+    status_code: 204
+- name: Perform PATCH operation to set hostanme
+  sonic_api:
+    url: data/openconfig-system:system/config/hostname
+    method: "PUT"
+    body: { "openconfig-system:hostname": "{{inventory_hostname}}"}
+    status_code: 204
+- name: Perform PUT operation to enable mgmt vrf
+  sonic_api:
+    url: data/sonic-mgmt-vrf:sonic-mgmt-vrf
+    method: "PUT"
+    body: {"sonic-mgmt-vrf:sonic-mgmt-vrf":{"MGMT_VRF_CONFIG":{"MGMT_VRF_CONFIG_LIST":[{"vrf_global_name":"vrf_global","mgmtVrfEnabled":true,"in_band_mgmt_enabled":true}]}}}
+    status_code: 204

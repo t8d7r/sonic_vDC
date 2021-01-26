@@ -1,0 +1,26 @@
+---
+# tasks file for vlans
+- name: Create l2 vni vlans
+  sonic_vlans:
+    config: "{{sonic_l2_vni_vlans_list}}"
+    state: merged
+  when: sonic_l2_vni_vlans_list is defined and sonic_l2_vni_vlans_list
+
+- name: Create l3 vni vlans
+  sonic_vlans:
+    config: "{{sonic_l3_vni_vlans_list}}"
+    state: merged
+  when: sonic_l3_vni_vlans_list is defined and sonic_l3_vni_vlans_list
+
+- name: Create mclag vlan
+  sonic_vlans:
+    config: 
+      - vlan_id: "{{vlan_mclag}}"
+    state: merged
+  when: sonic_vlans_list is defined and sonic_vlans_list
+
+- name: Add vlan to interfaces
+  sonic_l2_interfaces:
+    config: "{{sonic_vlans_interfaces}}"
+    state: merged
+  when: sonic_vlans_interfaces is defined and sonic_vlans_interfaces

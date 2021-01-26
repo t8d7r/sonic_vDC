@@ -1,0 +1,14 @@
+---
+- name: "SONiC Configure Vrfs"
+  hosts: leaf1
+  gather_facts: no
+  connection: httpapi
+  become: true
+  collections:
+    - dellemc.enterprise_sonic
+  tasks:
+  - name: "Config vrfs"
+    sonic_vrfs:
+      config: "{{ sonic_vrfs }}"
+      state: merged 
+    when: sonic_vxlan_conf is defined and sonic_vxlan_conf 

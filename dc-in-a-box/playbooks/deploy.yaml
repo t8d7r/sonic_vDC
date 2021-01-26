@@ -1,0 +1,12 @@
+---
+- hosts: sonic
+  gather_facts: no
+  become: true
+  connection: httpapi 
+  roles:
+    - common
+    - interfaces
+    - vlans
+    - vrfs
+    - bgpunderlay 
+    - vxlan-overlay  

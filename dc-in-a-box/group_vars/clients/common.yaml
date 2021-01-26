@@ -1,0 +1,16 @@
+ansible_ssh_user: vagrant
+ansible_ssh_pass: vagrant
+ansible_ssh_extra_args: "-o StrictHostKeyChecking=no"
+connection: ssh
+
+end_hosts:
+  client11:
+    cl_ip_addr: 192.168.100.11/24
+  client12:
+    cl_ip_addr: 192.168.200.12/24
+  client21:
+    cl_ip_addr: 192.168.150.21/24
+  client22:
+    cl_ip_addr: 192.168.200.22/24
+
+cl_ip_addr: "{{ end_hosts[inventory_hostname].cl_ip_addr }}"

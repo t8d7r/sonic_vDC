@@ -1,0 +1,32 @@
+---
+- name: "SONiC Configure Vxlan OveRlay"
+  hosts: leaf1
+  gather_facts: no
+  connection: httpapi
+  become: true
+  collections:
+    - dellemc.enterprise_sonic
+  tasks:
+  - name: "Config vxlan overlay"
+    sonic_vxlans:
+      config: "{{ sonic_vxlan_conf }}"
+      state: merged 
+    when: sonic_vxlan_conf is defined and sonic_vxlan_conf
+  - name: "Config neigh suppress"
+    vars:
+      ansible_connection: network_cli
+    sonic_config:
+      lines: neigh-suppress
+      parents: int Vlan{{ item.vlan_id }}
+    register: result
+    loop: "{{sonic_vlans_list}}"
+    when: sonic_vlans_list is defined and sonic_vlans_list 
+  - name: "Config anycast address"
+    vars:
+      ansible_connection: network_cli
+    sonic_config:
+      lines: ip anycast-address "{{item.prefix[:-4]+'254/24'}}"  
+      parents: int Vlan{{ item.vlan_id }}
+    register: result
+    loop: "{{sonic_vlans_list}}"
+    when: item.prefix is defined and sonic_vlans_list is defined and sonic_vlans_list 

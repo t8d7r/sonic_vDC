@@ -1,0 +1,27 @@
+---
+- name: "SONiC Configure Switch"
+  hosts: leafs
+  gather_facts: no
+  connection: httpapi
+  become: true
+  collections:
+    - dellemc.sonic
+  tasks:
+  - name: Perform PUT operation to configure loopbacks
+    sonic_api:
+      url: data/sonic-loopback:sonic-loopback
+      method: "PUT"
+      body: {"sonic-loopback:sonic-loopback":{"LOOPBACK":{"LOOPBACK_LIST":[{"name":"{{ devices[inventory_hostname].l3interfaces.Loopback0.name }}","description":"{{ devices[inventory_hostname].l3interfaces.Loopback0.description }}"}]}}}
+      status_code: 201
+
+  - name : Perform PUT operation to configure loopbacks @IP
+    sonic_api:
+      url: data/sonic-loopback-interface:sonic-loopback-interface
+      method: "PUT"
+      body: { "sonic-loopback-interface:sonic-loopback-interface": { "LOOPBACK_INTERFACE": { "LOOPBACK_INTERFACE_LIST": [ { "loIfName": "{{ devices[inventory_hostname].l3interfaces.Loopback0.name }}", "ipv6_use_link_local_only": "disable" } ], "LOOPBACK_INTERFACE_IPADDR_LIST": [ { "loIfName": "{{ devices[inventory_hostname].l3interfaces.Loopback0.name }}", "ip_prefix": "{{ devices[inventory_hostname].l3interfaces.Loopback0.ipv4 }}"} ] } }}
+      status_code: 201
+#  - name: Host Count
+#    debug:
+#      msg: "{{ devices[inventory_hostname].l3interfaces.loopback0.name }}={{ devices[inventory_hostname].l3interfaces.loopback0.ipv4 }}"
+#    tags:
+#      - test

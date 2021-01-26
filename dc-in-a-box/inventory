@@ -1,0 +1,26 @@
+spine1 ansible_host=192.168.121.62
+spine2 ansible_host=192.168.121.168
+leaf1  ansible_host=192.168.121.118
+leaf2  ansible_host=192.168.121.111
+leaf3  ansible_host=192.168.121.143
+leaf4  ansible_host=192.168.121.238
+client11 ansible_host=192.168.121.95
+client12 ansible_host=192.168.121.15
+client21 ansible_host=192.168.121.218
+client22 ansible_host=192.168.121.117
+
+[spines]
+spine[1:2]
+
+[leafs]
+leaf[1:4]
+
+[clients]
+client11
+client12
+client21
+client22
+
+[sonic:children]
+spines
+leafs
