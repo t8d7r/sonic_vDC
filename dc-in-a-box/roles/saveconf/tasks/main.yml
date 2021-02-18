@@ -1,0 +1,11 @@
+---
+# tasks file for saveconf
+- name: "Save configuration"
+  vars:
+    ansible_connection: network_cli
+  sonic_config:
+    commands: ['write mem']
+  register: result
+  until: result is not failed
+  retries: 100
+

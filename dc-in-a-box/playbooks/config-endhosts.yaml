@@ -20,3 +20,4 @@
       ip add add  {{ end_hosts[inventory_hostname].cl_ip_addr }} dev bond0
       ip ro add {{  cl_ip_addr[:-9]+'0.0/16' }} via {{  cl_ip_addr[:-5]+'254' }}
     become: yes
+    when: end_hosts is defined and end_hosts

@@ -104,6 +104,9 @@ Vagrant.configure("2") do |config|
         cl.ssh.password = "vagrant"
         cl.vm.synced_folder ".", "/vagrant", disabled: true
         cl.vm.hostname =  "client#{i}#{k}"
+        cl.vm.provider :libvirt do |spec|
+          spec.nic_model_type = "e1000"
+          end
         cl.vm.provision "shell", inline: <<-SHELL
              sudo yum install python3 -y
           SHELL
@@ -127,5 +130,18 @@ Vagrant.configure("2") do |config|
     oob.vm.hostname = "oob-mgmt-server" 
     oob.vm.box = "viniciusfs/centos7"
     oob.vm.synced_folder "./share", "/vagrant", disabled: false
+    oob.vm.hostname =  "oob.vm.name"
+    oob.vm.provider :libvirt do |spec|
+      spec.memory = 2048
+      spec.nic_model_type = "e1000"
+      end
+    oob.vm.provision "shell", inline: <<-SHELL
+          sudo yum install python3 -y
+          sudo yum install epel-release -y
+          sudo yum install ansible -y
+          sudo pip3 install jinja2
+          su - vagrant -c "ansible-galaxy collection install dellemc.enterprise_sonic"
+       SHELL
+
   end
 end

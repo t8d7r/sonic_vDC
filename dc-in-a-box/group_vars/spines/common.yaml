@@ -26,7 +26,7 @@ sonic_l3_interfaces:
    - name: "{{ loopback_underlay }}"
      ipv4:
        addresses:
-        - address: "{{ loopback0_ip }}"
+        - address: "{{ host_data[inventory_hostname].loopback0_ip }}"
    - name: "{{ To_leaf_1 }}"
      ipv6:
        enabled: true

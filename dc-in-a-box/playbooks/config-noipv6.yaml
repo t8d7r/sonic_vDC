@@ -1,0 +1,16 @@
+---
+- name: "SONiC Configure no IPv6"
+  hosts: leaf1
+  gather_facts: no
+  connection: network_cli
+  become: true
+  collections:
+    - dellemc.enterprise_sonic
+  tasks:
+    - name: No IPv6
+      sonic_config:
+        lines: no ipv6 enable
+        parents: interface {{ item }}
+      register: result
+      loop: "{{sonic_l2_interfaces}}"
+      when: sonic_l2_interfaces is defined and sonic_l2_interfaces

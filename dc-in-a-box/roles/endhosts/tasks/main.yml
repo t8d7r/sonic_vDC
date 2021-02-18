@@ -1,0 +1,27 @@
+---
+# tasks file for endhosts
+- name: "End host configuration"
+  vars:
+    - ansible_ssh_user: vagrant
+    - ansible_ssh_pass: vagrant
+    - ansible_ssh_extra_args: "-o StrictHostKeyChecking=no"
+    - connection: ssh
+  shell: |
+    ip link add bond0 type bond
+    ip link set bond0 type bond miimon 100 mode 802.3ad
+    ip link set eth1 down
+    ip link set eth1 master bond0
+    ip link set eth2 down
+    ip link set eth2 master bond0
+    ip link set bond0 up
+    ip link set eth1 up
+    ip link set eth2 up
+    ip add add  {{ end_hosts[inventory_hostname].cl_ip_addr }} dev bond0
+    ip ro add {{  end_hosts[inventory_hostname].cl_ip_addr[:-9]+'0.0/16' }} via {{  end_hosts[inventory_hostname].cl_ip_addr[:-5]+'254' }}
+  become: yes
+  when: end_hosts is defined and end_hosts
+
+- name: Pause for 5 sec before next task
+  pause:
+    seconds: 5
+

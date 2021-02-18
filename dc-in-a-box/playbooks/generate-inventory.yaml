@@ -1,0 +1,8 @@
+---
+- name: "Generate Inventory"
+  hosts: 127.0.0.1
+  tasks:
+  - name: Generate inventory
+    local_action:
+      module: shell
+        sudo vagrant status >> test_inventory.txt
