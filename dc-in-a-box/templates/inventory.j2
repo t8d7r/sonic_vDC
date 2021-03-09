@@ -1,0 +1,14 @@
+[spines]
+spine[1:{{nbspine}}]
+[leafs]
+leaf[1:{{nbleaf*2}}]
+[clients]
+{% for i in range(1,nbleaf+1) -%}
+{%- for j in range(1,nbsrv+1) -%}
+client{{i}}{{j}}
+{% endfor -%}
+{%- endfor -%}
+[sonic:children]
+spines
+leafs
+
