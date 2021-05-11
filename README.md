@@ -12,6 +12,12 @@ Tested with:
    * *git clone https://github.com/t8d7r/sonic_vDC*
 2. Add the vagrant SONiC box.
    * *vagrant box add --name SONiC .box*
-3. Run vagrant up and define number of spines, number of leaf pair and number of server per leaf pair :
+3. Run vagrant up and define number of spines (between 1 and 4), number of leaf pair (between 1 and 4) and number of server per leaf pair (between 1 and 4):
    * If only the physical topology is required without provisioning the configs use:
        * *vagrant up --no-provision*
+
+## Tips 
+1. Generated topology can be found in topology file
+2. A new environment can be generated after destroy all vms 
+  * *vagrant destroy -f* or *vagrant destroy vm_name* on each vm
+
