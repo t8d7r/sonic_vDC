@@ -18,6 +18,6 @@ Tested with:
 
 ## Tips 
 1. Generated topology can be found in topology file
-2. A new environment can be generated after destroy all vms 
-  * *vagrant destroy -f* or *vagrant destroy vm_name* on each vm
+2. A new environment can be generated after destroying all vms 
+   * *vagrant destroy -f* or *vagrant destroy vm_name* on each vm
 
