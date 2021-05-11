@@ -9,7 +9,7 @@ Tested with:
 
 ## Step by step procedure to set up the environment: 
 1. Clone the project
-   * *git clone https://github.com/t8d7r/sonic_vDC* *
+   * *git clone https://github.com/t8d7r/sonic_vDC
 2. Add the vagrant SONiC box.
    * *vagrant box add --name SONiC .box*
 3. Run vagrant up and define number of spines, number of leaf pair and number of server per leaf pair :
