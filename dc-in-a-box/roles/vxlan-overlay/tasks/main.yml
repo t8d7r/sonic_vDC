@@ -32,17 +32,14 @@
   until: result is not failed
   retries: 100
 
-- name: "Config anycast mac address"
-  vars:
-    ansible_connection: network_cli
-  sonic_config:
-    lines: ip anycast-mac-address "{{ sonic_anycast_mac_address }}"
+- name: "Config anycast mac address"  
+  sonic_system:
+    config:
+      anycast_address:
+        ipv4: true
+        mac_address: "{{ sonic_anycast_mac_address }}"
+    state: merged
   when: sonic_anycast_mac_address is defined and sonic_anycast_mac_address
   register: result
   until: result is not failed
   retries: 100
-
-- name: Pause for 5 sec before next task
-  pause:
-    seconds: 5
-

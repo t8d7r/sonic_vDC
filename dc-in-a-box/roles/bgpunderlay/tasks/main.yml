@@ -11,6 +11,7 @@
   when: sonic_prefix_list_cli is defined and sonic_prefix_list_cli
   until: result is not failed
   retries: 100
+
 - name: push route-map prefix for clos-fabric usecase
   vars:
     ansible_connection: network_cli
@@ -21,6 +22,7 @@
   when: sonic_route_maps_cli is defined and sonic_route_maps_cli
   register: result
   until: result is not failed
+
 - name: Create BGP configuration
   sonic_bgp:
     config: "{{sonic_bgp}}"
@@ -28,6 +30,7 @@
   register: result
   until: result is not failed
   retries: 100
+
 - name: Create BGP AF configuration
   sonic_bgp_af:
     config: "{{sonic_bgp_af}}"
@@ -35,6 +38,7 @@
   register: result
   until: result is not failed
   retries: 100
+
 - name: Create BGP Neighbors configuration
   sonic_bgp_neighbors:
     config: "{{sonic_bgp_neighbors}}"
@@ -42,7 +46,6 @@
   register: result
   until: result is not failed
   retries: 100
-- name: Pause for 5 sec before next task
-  pause:
-    seconds: 5
 
+- name: Pause before next action
+  pause: seconds=5

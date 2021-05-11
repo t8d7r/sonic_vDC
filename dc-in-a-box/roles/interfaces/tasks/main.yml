@@ -50,7 +50,3 @@
   until: result is not failed
   retries: 100
 
-- name: Pause for 5 sec before next task
-  pause:
-    seconds: 5
-

@@ -21,7 +21,3 @@
   become: yes
   when: end_hosts is defined and end_hosts
 
-- name: Pause for 5 sec before next task
-  pause:
-    seconds: 5
-

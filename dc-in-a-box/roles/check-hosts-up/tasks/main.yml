@@ -13,19 +13,12 @@
   until: output_ping.ping.find("pong") != -1
   retries: 100
 
-- debug:
-    var: output_ping.ping
-
 - name: Check system readiness
   connection: ssh
   shell: show system status
   register: output_readiness
   until: output_readiness.stdout.find("System is ready") != -1
   retries: 100
-  
-- debug:
-    var: output_readiness.stdout
-
-- name: Pause for 5 sec before next task
-  pause:
-    seconds: 5
+ 
+- name: Pause before next action
+  pause: seconds=5 

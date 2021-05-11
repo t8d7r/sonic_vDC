@@ -4,18 +4,16 @@
   become: true
   connection: httpapi 
   roles:
-    - check-hosts-up
-    - disable-ztp
-    - check-hosts-up
-    - common
-    - interfaces
-    - vlans
-    - vrfs
-    - bgpunderlay 
-    - vxlan-overlay
-    - saveconf 
+     - check-hosts-up
+     - common
+     - interfaces
+     - vlans
+     - vrfs
+     - bgpunderlay 
+     - vxlan-overlay
+     - saveconf 
 - hosts: clients  
   gather_facts: no
   become: true
   roles:
-    - endhosts 
+     - endhosts 

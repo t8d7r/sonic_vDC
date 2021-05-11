@@ -1,8 +1,0 @@
----
-- hosts: leaf1
-  connection: local
-  tasks:
-    - name: Building inventory file
-      template:
-        src=../templates/route_map_prefix.j2
-        dest=test.txt
