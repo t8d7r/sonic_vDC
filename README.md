@@ -4,8 +4,8 @@ Tested with:
    * Ubuntu 20.04.1 LTS
    * ansible 2.9.6
    * python 3.8.5 
-   * vagrant 2.2.6
-      * *VER="2.2.6" ; wget https://releases.hashicorp.com/vagrant/${VER}/vagrant_${VER}_x86_64.deb ; sudo dpkg -i vagrant_${VER}_x86_64.deb*
+   * vagrant 2.2.16
+      * *VER="2.2.16" ; wget https://releases.hashicorp.com/vagrant/${VER}/vagrant_${VER}_x86_64.deb ; sudo dpkg -i vagrant_${VER}_x86_64.deb*
 
 ## Step by step procedure to set up the environment: 
 1. Clone the project
