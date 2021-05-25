@@ -20,5 +20,6 @@ Tested with:
 1. Generated topology can be found in topology file
 2. A new environment can be generated after destroying all vms 
    * *vagrant destroy -f* or *vagrant destroy vm_name* on each vm
-3. Pair server are part of L2 vni , odd client servers are part of L3 VNI with symmetric routing 
+3. Pair server are part of L2 vni , odd client servers are part of L3 VNI with symmetric IRB
+4. Native vagrant ansible provisionner is not used, instead a mgmt vm is used to run ansible playbook  
 
