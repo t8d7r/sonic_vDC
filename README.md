@@ -1,6 +1,6 @@
 # sonic_vDC
 # Interactive Vagrant for SONiC Lab Environment
-# This work is inspired by incredible teammates work which can be found here : https://github.com/Doods111/DELLOS10 
+This work is inspired by incredible teammates work which can be found here : https://github.com/Doods111/DELLOS10 
 
 Tested with:
    * Ubuntu 20.04.1 LTS
