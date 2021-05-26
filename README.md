@@ -10,12 +10,12 @@ Tested with:
       * *VER="2.2.16" ; wget https://releases.hashicorp.com/vagrant/${VER}/vagrant_${VER}_x86_64.deb ; sudo dpkg -i vagrant_${VER}_x86_64.deb*
 
 ## Step by step procedure to set up the environment: 
-0. Install vagrant :
+1. Install vagrant :
   * *sudo apt install -y qemu qemu-kvm libvirt-daemon-system libvirt-clients libxslt-dev libxml2-dev libvirt-dev zlib1g-dev ruby-dev ruby-libvirt ebtables dnsmasq-base  bridge-utils  virt-manager build-essential nfs-kernel-server*
   * *VER="2.2.16" ; wget https://releases.hashicorp.com/vagrant/${VER}/vagrant_${VER}_x86_64.deb ; sudo dpkg -i vagrant_${VER}_x86_64.deb*
   * *vagrant plugin install vagrant-libvirt; vagrant plugin install vagrant-hostmanager; vagrant plugin install vagrant-sshfs*
   * *sudo systemctl restart libvirtd*
-1. Clone the project
+2. Clone the project
    * *git clone https://github.com/t8d7r/sonic_vDC*
 3. Add the vagrant SONiC box.
    * *vagrant box add --name sonic-d SONiC.box*
