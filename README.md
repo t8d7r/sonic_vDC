@@ -11,15 +11,15 @@ Tested with:
 
 ## Step by step procedure to set up the environment: 
 1. Install vagrant :
-  * *sudo apt install -y qemu qemu-kvm libvirt-daemon-system libvirt-clients libxslt-dev libxml2-dev libvirt-dev zlib1g-dev ruby-dev ruby-libvirt ebtables dnsmasq-base  bridge-utils  virt-manager build-essential nfs-kernel-server*
-  * *VER="2.2.16" ; wget https://releases.hashicorp.com/vagrant/${VER}/vagrant_${VER}_x86_64.deb ; sudo dpkg -i vagrant_${VER}_x86_64.deb*
-  * *vagrant plugin install vagrant-libvirt; vagrant plugin install vagrant-hostmanager; vagrant plugin install vagrant-sshfs*
-  * *sudo systemctl restart libvirtd*
+   * *sudo apt install -y qemu qemu-kvm libvirt-daemon-system libvirt-clients libxslt-dev libxml2-dev libvirt-dev zlib1g-dev ruby-dev ruby-libvirt ebtables dnsmasq-base  bridge-utils  virt-manager build-essential nfs-kernel-server*
+   * *VER="2.2.16" ; wget https://releases.hashicorp.com/vagrant/${VER}/vagrant_${VER}_x86_64.deb ; sudo dpkg -i vagrant_${VER}_x86_64.deb*
+   * *vagrant plugin install vagrant-libvirt; vagrant plugin install vagrant-hostmanager; vagrant plugin install vagrant-sshfs*
+   * *sudo systemctl restart libvirtd*
 2. Clone the project
    * *git clone https://github.com/t8d7r/sonic_vDC*
-3. Add the vagrant SONiC box.
+4. Add the vagrant SONiC box.
    * *vagrant box add --name sonic-d SONiC.box*
-4. Run vagrant up and define number of spines (between 1 and 4), number of leaf pair or racks (between 1 and 4) and number of server per leaf pair (between 1 and 4):
+5. Run vagrant up and define number of spines (between 1 and 4), number of leaf pair or racks (between 1 and 4) and number of server per leaf pair (between 1 and 4):
    * If only the physical topology is required without provisioning the configs use:
        * *vagrant up --no-provision*
 
