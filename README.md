@@ -11,10 +11,10 @@ Tested with:
 
 ## Step by step procedure to set up the environment: 
 0. Install vagrant :
-  * sudo apt install -y qemu qemu-kvm libvirt-daemon-system libvirt-clients libxslt-dev libxml2-dev libvirt-dev zlib1g-dev ruby-dev ruby-libvirt ebtables dnsmasq-base  bridge-utils  virt-manager build-essential nfs-kernel-server![image](https://user-images.githubusercontent.com/23518208/119622179-377e3a80-be07-11eb-87a4-7e04ba14bbf4.png)
-  * VER="2.2.16" ; wget https://releases.hashicorp.com/vagrant/${VER}/vagrant_${VER}_x86_64.deb ; sudo dpkg -i vagrant_${VER}_x86_64.deb![image](https://user-images.githubusercontent.com/23518208/119622199-3e0cb200-be07-11eb-8233-cdb275088c76.png)
-  * vagrant plugin install vagrant-libvirt; vagrant plugin install vagrant-hostmanager; vagrant plugin install vagrant-sshfs
-  * sudo systemctl restart libvirtd
+  * *sudo apt install -y qemu qemu-kvm libvirt-daemon-system libvirt-clients libxslt-dev libxml2-dev libvirt-dev zlib1g-dev ruby-dev ruby-libvirt ebtables dnsmasq-base  bridge-utils  virt-manager build-essential nfs-kernel-server*
+  * *VER="2.2.16" ; wget https://releases.hashicorp.com/vagrant/${VER}/vagrant_${VER}_x86_64.deb ; sudo dpkg -i vagrant_${VER}_x86_64.deb*
+  * *vagrant plugin install vagrant-libvirt; vagrant plugin install vagrant-hostmanager; vagrant plugin install vagrant-sshfs*
+  * *sudo systemctl restart libvirtd*
 1. Clone the project
    * *git clone https://github.com/t8d7r/sonic_vDC*
 3. Add the vagrant SONiC box.
