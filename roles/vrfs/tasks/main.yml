@@ -1,0 +1,10 @@
+---
+- name: "Config vrfs"
+  sonic_vrfs:
+    config: "{{ sonic_vrfs }}"
+    state: merged
+  when: sonic_vrfs is defined and sonic_vrfs
+  register: result
+  until: result is not failed
+  retries: 100
+

@@ -1,0 +1,26 @@
+---
+- name: Config Hostname
+  sonic_system:
+    config:
+      hostname: "{{inventory_hostname}}"
+    state: merged
+  register: result
+  until: result is not failed
+  retries: 100
+
+- name: Perform PUT operation to enable mgmt vrf
+  sonic_api:
+    url: data/sonic-mgmt-vrf:sonic-mgmt-vrf
+    method: "PUT"
+    body: {"sonic-mgmt-vrf:sonic-mgmt-vrf":{"MGMT_VRF_CONFIG":{"MGMT_VRF_CONFIG_LIST":[{"vrf_global_name":"vrf_global","mgmtVrfEnabled":true,"in_band_mgmt_enabled":true}]}}}
+    status_code: 204
+
+- name: Config MCLAG GW Mac Adress
+  vars:
+    ansible_connection: network_cli
+  sonic_config:
+    lines:  mclag gateway-mac {{ mclag_gateway_mac }}
+  register: result
+  when: mclag_gateway_mac is defined and mclag_gateway_mac
+  until: result is not failed
+  retries: 100

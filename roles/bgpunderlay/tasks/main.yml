@@ -1,0 +1,48 @@
+---
+- name: push prefix-list configs for clos-fabric usecase
+  vars:
+    ansible_connection: network_cli
+  sonic_config:
+    lines: ip prefix-list {{ item.0.name }} seq {{ item.1.seq }} {{ 'permit' if item.0.permit else 'deny' }} {{ item.1.ip }} {{ item.1.condition if item.1.condition is defined else ''}}
+  register: result
+  with_subelements:
+    - "{{sonic_prefix_list_cli}}"
+    - entries
+  when: sonic_prefix_list_cli is defined and sonic_prefix_list_cli
+  until: result is not failed
+  retries: 100
+
+- name: push route-map prefix for clos-fabric usecase
+  vars:
+    ansible_connection: network_cli
+  sonic_config:
+    lines: match ip address prefix-list {{ item.match_ip_prefix_list }}
+    parents: route-map {{ item.name }}  {{ 'permit' if item.permit else 'deny' }}  {{ item.seq }}
+  loop: "{{sonic_route_maps_cli}}"
+  when: sonic_route_maps_cli is defined and sonic_route_maps_cli
+  register: result
+  until: result is not failed
+
+- name: Create BGP configuration
+  sonic_bgp:
+    config: "{{sonic_bgp}}"
+  when: sonic_bgp is defined and sonic_bgp
+  register: result
+  until: result is not failed
+  retries: 100
+
+- name: Create BGP AF configuration
+  sonic_bgp_af:
+    config: "{{sonic_bgp_af}}"
+  when: sonic_bgp_af is defined and sonic_bgp_af
+  register: result
+  until: result is not failed
+  retries: 100
+
+- name: Create BGP Neighbors configuration
+  sonic_bgp_neighbors:
+    config: "{{sonic_bgp_neighbors}}"
+  when: sonic_bgp_neighbors is defined and sonic_bgp_neighbors
+  register: result
+  until: result is not failed
+  retries: 100

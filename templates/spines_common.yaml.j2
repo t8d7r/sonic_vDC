@@ -1,0 +1,83 @@
+switch_role: spine
+
+sonic_interfaces:
+{%- for i in range(1,(nbleaf*2)+1) %}
+   - name: Ethernet{{i-1}}
+     description: To_Leaf_{{i}}
+     enabled: true
+{%- endfor %}
+   - name: Loopback0
+     description: Loopback_underlay
+     enabled: true
+
+sonic_l3_interfaces:
+   - name: Loopback0
+     ipv4:
+       addresses: 
+        - address: 10.0.0.10{{spinenumber}}/32
+{%- for i in range(1,nbleaf*2+1) %}
+   - name: Ethernet{{i-1}}
+     ipv6:
+       enabled: true
+{%- endfor %}
+
+sonic_route_maps_cli:
+  - name: REDISTU
+    permit: true
+    seq: 10
+    match_ip_prefix_list: UNDERLAY
+
+sonic_prefix_list_cli:
+  - name: UNDERLAY
+    permit: true
+    entries:
+     - ip: 10.0.0.0/24
+       condition: ge 32 le 32
+       seq: 10
+
+sonic_bgp:
+   - bgp_as: "65000"
+     router_id: 10.0.0.10{{spinenumber}}
+     bestpath:
+       as_path:
+         multipath_relax: true
+
+sonic_bgp_af:
+    - bgp_as: "65000"
+      address_family:
+        afis:
+          - afi: ipv4
+            safi: unicast
+            redistribute:
+              - protocol: connected
+                route_map: REDISTU
+            max_path:
+              ebgp: 4
+
+sonic_bgp_neighbors:
+    - bgp_as: "65000"
+      peer_group:
+        - name: LEAF
+          remote_as:
+            peer_type: external
+          advertisement_interval: 5
+          timers:
+            keepalive: 3
+            holdtime: 9
+          bfd: true
+          capability:
+            extended_nexthop: true
+          address_family:
+            afis:
+              - afi: ipv4
+                safi: unicast
+                activate: true
+              - afi: l2vpn
+                safi: evpn
+                activate: true
+      neighbors:
+{%- for i in range(1,nbleaf*2+1) %}
+        - neighbor: Ethernet{{i-1}} 
+          peer_group: LEAF
+{%- endfor %}
+
