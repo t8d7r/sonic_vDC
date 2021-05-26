@@ -1,9 +1,0 @@
-ansible_ssh_user: vagrant
-ansible_ssh_pass: vagrant
-ansible_ssh_extra_args: "-o StrictHostKeyChecking=no"
-connection: ssh
-
-end_hosts:
-  client{{i}}{{j}}:
-    cl_ip_addr: 10.87.{{2-((j+1)%2)}}{{i*((j+1)%2)}}{{((j+1)//2)}}.{{i}}{{j}}/24
-

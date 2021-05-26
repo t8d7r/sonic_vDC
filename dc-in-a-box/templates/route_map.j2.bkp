@@ -1,2 +1,0 @@
-ip prefix-list UNDERLAY seq 1 permit 10.0.0.0/24 ge 32 le 32
-
