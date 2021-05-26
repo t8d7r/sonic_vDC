@@ -19,7 +19,7 @@ Tested with:
    * *git clone https://github.com/t8d7r/sonic_vDC*
 4. Add the vagrant SONiC box.
    * *vagrant box add --name sonic-d SONiC.box*
-5. Run vagrant up and define number of spines (between 1 and 4), number of leaf pair or racks (between 1 and 4) and number of server per leaf pair (between 1 and 4):
+5. Run vagrant up and answer interactive question to define number of spines (between 1 and 4), number of leaf pair or racks (between 1 and 4) and number of server per leaf pair (between 1 and 4):
    * If only the physical topology is required without provisioning the configs use:
        * *vagrant up --no-provision*
 
