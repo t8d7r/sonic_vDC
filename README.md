@@ -32,5 +32,5 @@ Tested with:
 3. A new environment can be generated after destroying all vms 
    * *vagrant destroy -f* or *vagrant destroy vm_name* on each vm
 4. Pair server are part of L2 vni , odd client servers are part of L3 VNI with symmetric IRB
-5. Native vagrant ansible provisionner is not used, instead a mgmt vm is used to run ansible playbook, it is based on DellEMC SONiC collection : https://github.com/ansible-collections/dellemc.enterprise_sonic
+5. Native vagrant ansible provisionner is not used, instead a mgmt vm is used to run ansible playbook, playbook use DellEMC SONiC collection : https://github.com/ansible-collections/dellemc.enterprise_sonic
 
